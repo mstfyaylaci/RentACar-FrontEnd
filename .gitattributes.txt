@@ -1,0 +1,4 @@
+*.ts linguist-detectable=true
+*.html linguist-detectable=false
+node_modules/* linguist-vendored
+dist/* linguist-vendored
