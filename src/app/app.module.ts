@@ -22,6 +22,20 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaymentComponent } from './components/payment/payment.component';
+import { AdminLayaoutComponent } from './components/admin/admin-layaout/admin-layaout.component';
+import { BrandAddComponent } from './components/admin/admin-brand/brand-add/brand-add.component';
+import { BrandUpdateComponent } from './components/admin/admin-brand/brand-update/brand-update.component';
+import { BrandDeleteComponent } from './components/admin/admin-brand/brand-delete/brand-delete.component';
+import { BrandManagerComponent } from './components/admin/admin-brand/brand-manager/brand-manager.component';
+import { ColorManagerComponent } from './components/admin/admin-color/color-manager/color-manager.component';
+import { ColorAddComponent } from './components/admin/admin-color/color-add/color-add.component';
+import { ColorDeleteComponent } from './components/admin/admin-color/color-delete/color-delete.component';
+import { ColorUpdateComponent } from './components/admin/admin-color/color-update/color-update.component';
+import { CarAddComponent } from './components/admin/admin-car/car-add/car-add.component';
+import { CarDeleteComponent } from './components/admin/admin-car/car-delete/car-delete.component';
+import { CarUpdateComponent } from './components/admin/admin-car/car-update/car-update.component';
+import { CarManagerComponent } from './components/admin/admin-car/car-manager/car-manager.component';
+import { MatDialogModule } from '@angular/material/dialog'; //
 
 @NgModule({
   declarations: [
@@ -40,12 +54,26 @@ import { PaymentComponent } from './components/payment/payment.component';
     FilterBrandPipe,
     FilterCarPipe,
     FilterColorPipe,
-    PaymentComponent
+    PaymentComponent,
+    AdminLayaoutComponent,
+    BrandAddComponent,
+    BrandUpdateComponent,
+    BrandDeleteComponent,
+    BrandManagerComponent,
+    ColorManagerComponent,
+    ColorAddComponent,
+    ColorDeleteComponent,
+    ColorUpdateComponent,
+    CarAddComponent,
+    CarDeleteComponent,
+    CarUpdateComponent,
+    CarManagerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, 
+    MatDialogModule  ,
     HttpClientModule ,
     FormsModule,
     ReactiveFormsModule,

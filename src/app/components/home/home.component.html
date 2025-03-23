@@ -126,7 +126,7 @@
             </div>
           </div>
           <div class="container">
-            <div class="carousel-caption" routerLink="/car-details/{{randomCar.carId}}">
+            <div class="carousel-caption" routerLink="/car-details/{{randomCar.id}}">
               <h1 style="text-transform: uppercase; color: var(--firstThemeColor);">{{randomCar.brandName}}
                 {{randomCar.carName}}</h1>
               <p>Günlük <strong style="color: var(--firstThemeColor);">{{randomCar.dailyPrice | currency:"":""}}₺</strong>
@@ -302,7 +302,7 @@
           <div *ngFor="let car of cars | filterCar:filterCarModelName" class="col">
             <div class="card h-100" style="width: 15rem; background-color: var(--secondThemeColor);border-radius: 20px;">
   
-              <img [src]="getImagePath(car.carImages[0].imagePath)" routerLink="/cars/carDetail/{{car.carId}}"
+              <img [src]="getImagePath(car.carImages[0].imagePath)" routerLink="/cars/carDetail/{{car.id}}"
                 class="card-img-top mt-4" alt="image-not-found" style="object-fit: cover; width: 190px; margin:auto" />
   
               <div class="card-body" style="color: white">
@@ -314,7 +314,7 @@
                     currency:"":""}}₺</strong> den başlayan fiyatlarla..</p>
   
                 <div class="text-center">
-                  <button type="button" routerLink="/cars/carDetail/{{car.carId}}" class="btn btn-outline-primary"
+                  <button type="button" routerLink="/cars/carDetail/{{car.id}}" class="btn btn-outline-primary"
                    >İNCELE</button>
                 </div>  
               </div>

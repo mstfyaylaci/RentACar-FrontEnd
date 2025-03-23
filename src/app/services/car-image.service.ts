@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { CarImage } from '../models/entites/carImage';
 import { ListResponseModel } from '../models/responseModel/listResponseModel';
 import { Observable } from 'rxjs';
+import { ResponseModel } from '../models/responseModel/responseModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarImageService {
 
-  apiUrl='https://localhost:44327/api/';
+  apiUrl='https://localhost:44327/api/CarImages/';
   imageUrl='https://localhost:44327/Uploads/Images/'
   constructor(private httpClient:HttpClient) { }
 
@@ -19,16 +20,25 @@ export class CarImageService {
   }
 
   getCarImages():Observable<ListResponseModel<CarImage>>{
-    let newPath=this.apiUrl+"CarImages/getall" 
+    let newPath=this.apiUrl+"getall" 
     return this.httpClient
     .get<ListResponseModel<CarImage>>(newPath)
   }
 
   getCarImagesByCar(carId:number):Observable<ListResponseModel<CarImage>>{
-    let newPath=this.apiUrl+"CarImages/getbycarid?carId="+carId 
+    let newPath=this.apiUrl+"getbycarid?carId="+carId 
     
     return this.httpClient
     .get<ListResponseModel<CarImage>>(newPath)
+  }
+
+  uploadCarImage(image: File,carId:number): Observable<ResponseModel> {
+     const newPath = this.apiUrl + "add"; // API'nin `add` endpoint'i
+    const sendForm = new FormData(); // FormData nesnesi oluştur
+    sendForm.append('carId', carId.toString()); // Araba ID'sini string olarak ekle
+    sendForm.append('file', image, image.name); // Dosyayı FormData'ya ekle
+    
+    return this.httpClient.post<ResponseModel>(newPath, sendForm);  // POST isteği gönder
   }
 
   

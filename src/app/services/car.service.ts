@@ -4,6 +4,7 @@ import { ListResponseModel } from '../models/responseModel/listResponseModel';
 import { Observable } from 'rxjs';
 import { Car } from '../models/entites/car';
 import { ResponseModel } from '../models/entites/responseModel';
+import { SingleResponseModel } from '../models/responseModel/singleResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -57,9 +58,24 @@ export class CarService {
     .get<ListResponseModel<Car>>(newPath)
   }
 
-  addCar(car:Car):Observable<ResponseModel>{
+  addCar(car:Car):Observable<SingleResponseModel<number>>{
     let newPath=this.apiUrl+"add"
 
+    return this.httpClient.post<SingleResponseModel<number>>(newPath,car)
+  }
+
+  updateCar(car:Car):Observable<ResponseModel>{
+    let newPath=this.apiUrl+"update"
+
+    return this.httpClient.post<ResponseModel>(newPath,car)
+  }
+
+  deleteCar(car:Car):Observable<ResponseModel>{
+
+    console.log(car);
+    let newPath=this.apiUrl+"delete"
+
+    console.log(newPath);
     return this.httpClient.post<ResponseModel>(newPath,car)
   }
 

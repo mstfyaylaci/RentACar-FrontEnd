@@ -201,7 +201,7 @@ export class CarDetailsComponent implements OnInit {
       //Markaya ait diğer araçlar listesinden, mevcut arabayı çıkartıyorum. Mevcut arabayı zaten görüntülüyor.
       let index: number = -1;
       for (let i = 0; i < this.carsOfCurrentBrand.length; i++) {
-        if (this.carsOfCurrentBrand[i].carId == this.currentCar.carId) {
+        if (this.carsOfCurrentBrand[i].id == this.currentCar.id) {
           index = i;
         }
       }

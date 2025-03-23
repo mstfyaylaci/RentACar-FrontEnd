@@ -1,0 +1,52 @@
+<div *ngIf="cars" class="cont">
+    <div class="card">
+        <div class="card-header text-center bg-dark bg-gradient text-light">
+            <h3>Araç Yönetimi</h3>
+            ({{cars.length}} araç listelendi)
+        </div>
+        <div class="card-body table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr class="bg-warning bg-gradient text-center">
+                        <th scope="col">ID</th>
+                        <th scope="col"></th>
+                        <th scope="col">Marka</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Renk</th>
+                        <th scope="col">Model Yılı</th>
+                        <th scope="col">Günlük Ücreti</th>
+                        <th scope="col">Açıklama</th>
+                        <th scope="col"><button (click)="openCarAddModal()" type="button"
+                                class="btn btn-success float-end px-3">Araç ekle</button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let car of cars" class="text-center">
+                        <td><strong>{{car.id}}</strong></td>
+                        <td><img [src]="getImagePath(car.carImages[0].imagePath)" height="50"></td>
+                        <td>{{car.brandName}}</td>
+                        <td>{{car.carName}}</td>
+                        <td>{{car.colorName}}</td>
+                        <td>{{car.modelYear}}</td>
+                        <td>{{car.dailyPrice}}</td>
+                        <td>{{car.description}}</td>
+                        <td>
+                            <div class="btn-group float-end">
+                                <button routerLink="/cars/carDetail/{{car.id}}" type="button"
+                                    class="btn btn-warning px-2">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                                <button (click)="openCarUpdateModal(car)" type="button" class="btn btn-dark px-2">
+                                    <i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button (click)="openCarDeleteModal(car)" type="button" class="btn btn-danger px-2">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

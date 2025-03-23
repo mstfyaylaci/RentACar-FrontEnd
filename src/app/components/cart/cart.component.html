@@ -54,7 +54,7 @@
                 <div class="mt-4 mb-4">
                     <div *ngFor="let cartItem of cartItems let last=last" class="container">
                         <div style="display: flex; flex: 1 1 auto;">
-                            <div routerLink="/cars/carDetail/{{cartItem.car.carId}}" class="d-flex align-items-center">
+                            <div routerLink="/cars/carDetail/{{cartItem.car.id}}" class="d-flex align-items-center">
                                 <img class="" [src]="getImagePath(cartItem.car.carImages[0].imagePath)" height="80"
                                     alt="..." style="object-fit: cover;">
                             </div>

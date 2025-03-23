@@ -4,6 +4,9 @@ import { HomeComponent } from './components/home/home.component';
 import { HomeLayaoutComponent } from './components/home-layaout/home-layaout.component';
 import { CarDetailsComponent } from './components/car-details/car-details.component';
 import { CartComponent } from './components/cart/cart.component';
+import { BrandManagerComponent } from './components/admin/admin-brand/brand-manager/brand-manager.component';
+import { ColorManagerComponent } from './components/admin/admin-color/color-manager/color-manager.component';
+import { CarManagerComponent } from './components/admin/admin-car/car-manager/car-manager.component';
 
 const routes: Routes = [
  
@@ -17,12 +20,19 @@ const routes: Routes = [
     path: '', component: HomeLayaoutComponent, children: [
       { path: 'cars/carDetail/:carId', component: CarDetailsComponent },
       { path: "cart", component: CartComponent },
-      
+      {
+        path: 'admin', component: HomeLayaoutComponent, children: [
+          { path: 'brand/manager', component: BrandManagerComponent},
+          { path: 'color/manager', component: ColorManagerComponent,  },
+          { path: 'car/manager', component: CarManagerComponent, },
+        ]
+      }
     ]
   },
   
   
   //{path:"cars/add", component:CarAddComponent},
+  
   
 ];
 

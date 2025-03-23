@@ -12,7 +12,7 @@ export class CartService {
   constructor(private toastrService: ToastrService) { }
 
   addToCart(car: Car, rentDate: Date, returnDate: Date): void {
-    let item = CartItems.find(c => c.car.carId === car.carId);
+    let item = CartItems.find(c => c.car.id === car.id);
     if (item) {
       this.toastrService.warning("Araç zaten sepetinizde", "Dikkat");
     } else {
@@ -28,7 +28,7 @@ export class CartService {
   }
 
   removeCartItem(car: Car): void {
-    let item = CartItems.find(c => c.car.carId === car.carId);
+    let item = CartItems.find(c => c.car.id === car.id);
     CartItems.splice(CartItems.indexOf(item), 1);
   }
 

@@ -42,7 +42,7 @@
                 [min]="today"
                 onkeydown="return false"
                 (ngModelChange)="validateDate(rentalStartDate,rentalEndDate)"
-                (ngModelChange)="checkIfCanCarBeRentedBetweenSelectedDates(currentCar.carId, rentalStartDate, rentalEndDate)"
+                (ngModelChange)="checkIfCanCarBeRentedBetweenSelectedDates(currentCar.id, rentalStartDate, rentalEndDate)"
                 (ngModelChange)="calculateRentalPeriod()"
                 ></div>
             </div>
@@ -53,7 +53,7 @@
                 [min]="rentalStartDate || today"
                 onkeydown="return false"
                 (ngModelChange)="validateDate(rentalStartDate,rentalEndDate)"
-                (ngModelChange)="checkIfCanCarBeRentedBetweenSelectedDates(currentCar.carId, rentalStartDate, rentalEndDate)"
+                (ngModelChange)="checkIfCanCarBeRentedBetweenSelectedDates(currentCar.id, rentalStartDate, rentalEndDate)"
                 (ngModelChange)="calculateRentalPeriod()" 
                 ></div>
             </div>
@@ -191,7 +191,7 @@
       <div *ngFor="let subCar of carsOfCurrentBrand" class="col">
         <div class="card h-100" style="width: 15rem; background-color: var(--secondThemeColor);border-radius: 20px;">
   
-          <img [src]="getImagePath(subCar.carImages[0].imagePath)" routerLink="/cars/carDetail/{{subCar.carId}}"
+          <img [src]="getImagePath(subCar.carImages[0].imagePath)" routerLink="/cars/carDetail/{{subCar.id}}"
             class="card-img-top mt-4" alt="image-not-found" style="object-fit: cover; width: 190px; margin:auto" />
   
           <div class="card-body" style="color: white">
@@ -203,7 +203,7 @@
                 currency:"":""}}₺</strong> den başlayan fiyatlarla..</p>
   
             <div class="text-center">
-              <a routerLink="/cars/carDetail/{{subCar.carId}}" class="btn"
+              <a routerLink="/cars/carDetail/{{subCar.id}}" class="btn"
                 style="background-color: var(--firstThemeColor); color: var(--secondThemeColor); font-weight: bold;">İNCELE</a>
             </div>
           </div>
