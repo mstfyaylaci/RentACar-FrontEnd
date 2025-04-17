@@ -182,7 +182,7 @@ export class HomeComponent implements OnInit {
       }
       tempCarList.splice(randomNumber, 1);
     }
-    console.log(this.randomCars);
+    
   }
 
   private getRandomNumber(max: number) {

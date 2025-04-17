@@ -19,7 +19,7 @@ import { FilterBrandPipe } from './pipes/filter-brand.pipe';
 import { FilterCarPipe } from './pipes/filter-car.pipe';
 import { FilterColorPipe } from './pipes/filter-color.pipe';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaymentComponent } from './components/payment/payment.component';
 import { AdminLayaoutComponent } from './components/admin/admin-layaout/admin-layaout.component';
@@ -35,7 +35,13 @@ import { CarAddComponent } from './components/admin/admin-car/car-add/car-add.co
 import { CarDeleteComponent } from './components/admin/admin-car/car-delete/car-delete.component';
 import { CarUpdateComponent } from './components/admin/admin-car/car-update/car-update.component';
 import { CarManagerComponent } from './components/admin/admin-car/car-manager/car-manager.component';
-import { MatDialogModule } from '@angular/material/dialog'; //
+import { MatDialogModule } from '@angular/material/dialog';
+import { LoginComponent } from './components/account/login/login.component';
+import { RegisterComponent } from './components/account/register/register.component';
+import { AccountLayaoutComponent } from './components/account/account-layaout/account-layaout.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+
 
 @NgModule({
   declarations: [
@@ -67,7 +73,11 @@ import { MatDialogModule } from '@angular/material/dialog'; //
     CarAddComponent,
     CarDeleteComponent,
     CarUpdateComponent,
-    CarManagerComponent
+    CarManagerComponent,
+    LoginComponent,
+    RegisterComponent,
+    AccountLayaoutComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -81,7 +91,13 @@ import { MatDialogModule } from '@angular/material/dialog'; //
       positionClass:"toast-bottom-right"
     })
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true
+    },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 .loginButtonLoginText {
     display: block;
-    color: #484848;
+    color: white;
     font-size: 15px;
     font-weight: 700;
     line-height: 1;
@@ -10,7 +10,7 @@
     width: 93px;
     display: block;
     font-size: 10px;
-    color: #484848;
+    color: white;
     white-space: nowrap;
     line-height: 1.4;
     overflow: hidden;

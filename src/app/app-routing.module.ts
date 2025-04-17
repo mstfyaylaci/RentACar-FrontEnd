@@ -7,6 +7,11 @@ import { CartComponent } from './components/cart/cart.component';
 import { BrandManagerComponent } from './components/admin/admin-brand/brand-manager/brand-manager.component';
 import { ColorManagerComponent } from './components/admin/admin-color/color-manager/color-manager.component';
 import { CarManagerComponent } from './components/admin/admin-car/car-manager/car-manager.component';
+import { LoginComponent } from './components/account/login/login.component';
+import { AccountLayaoutComponent } from './components/account/account-layaout/account-layaout.component';
+import { RegisterComponent } from './components/account/register/register.component';
+import { LoginGuard } from './guards/login.guard';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
  
@@ -19,16 +24,23 @@ const routes: Routes = [
   {
     path: '', component: HomeLayaoutComponent, children: [
       { path: 'cars/carDetail/:carId', component: CarDetailsComponent },
-      { path: "cart", component: CartComponent },
+      { path: "cart", component: CartComponent,canActivate: [LoginGuard] },
       {
         path: 'admin', component: HomeLayaoutComponent, children: [
-          { path: 'brand/manager', component: BrandManagerComponent},
-          { path: 'color/manager', component: ColorManagerComponent,  },
-          { path: 'car/manager', component: CarManagerComponent, },
+          { path: 'brand/manager', component: BrandManagerComponent ,canActivate: [LoginGuard,RoleGuard] ,data:{expectedRole:"admin"}},
+          { path: 'color/manager', component: ColorManagerComponent ,canActivate: [LoginGuard,RoleGuard], data: { expectedRole: 'admin' } },
+          { path: 'car/manager', component: CarManagerComponent ,canActivate: [LoginGuard,RoleGuard],data: { expectedRole: 'admin' } },
         ]
       }
     ]
   },
+
+  {
+    path: 'account', component: AccountLayaoutComponent, children: [
+      { path: 'login', component: LoginComponent ,canActivate: [LoginGuard]},
+      { path: 'register', component: RegisterComponent}
+    ]
+  }
   
   
   //{path:"cars/add", component:CarAddComponent},

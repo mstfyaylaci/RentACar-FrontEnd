@@ -54,10 +54,11 @@ export class CarManagerComponent implements OnInit {
     });
   }
   openCarUpdateModal(car: Car) {
+    
     const dialogRef = this.dialog.open(CarUpdateComponent, {
       disableClose: true,
-      width: "25%",
-      data: { updateCar: car }
+      width: "65%",
+      data: { updatedCar: car }
     });
 
     dialogRef.afterClosed().subscribe(result => {

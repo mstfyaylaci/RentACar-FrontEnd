@@ -11,9 +11,9 @@
       <div class="carousel-inner">
         <div *ngFor="let randomCar of randomCars; let i = index"
           class="{{(i == 0) ? 'carousel-item active' : 'carousel-item' }}">
-          <div class="random-car-image d-flex" style="text-transform: uppercase;">
+          <div class="random-car-image" style="text-transform: uppercase;">
             <div class="row">
-              <div class="col-md-4 text-end" style="padding-top: 90px;">
+              <div class="col-md-4 d-flex justify-content-center" style="padding-top: 90px;">
                 <div class="d-flex justify-content-end row">
                   <ul class="list-group text-light mt-5 align-items-end" style="width: 200px;">
   
@@ -24,7 +24,7 @@
                         </div>
                         <div class="text-center">
                           <div class="text-center">
-                            <button class="btn btn-warning">
+                            <button class="btn btn-primary">
                               <i class="bi bi-star-fill"></i>
                               
                             </button>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="text-center">
                           <div class="text-center">
-                            <button class="btn btn-warning"> 
+                            <button class="btn btn-primary"> 
                               <i class="bi bi-star"></i>
                             </button>
                           </div>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="text-center">
                           <div class="text-center">
-                            <button class="btn btn-warning">
+                            <button class="btn btn-primary">
                               <i class="bi bi-paint-bucket"></i>
                             </button>
                           </div>
@@ -66,19 +66,31 @@
                 </div>
               </div>
   
-              <div class="col-md-4 d-flex justify-content-center">
+              
+              <div class="col-md-4  ">
+                <!-- carousel-caption start -->
+                <div class="container">
+                  <div class="carousel-caption" routerLink="/car-details/{{randomCar.id}}">
+                    <h1 class="text-primary" style="text-transform: uppercase; ">{{randomCar.brandName}}
+                      {{randomCar.carName}}</h1>
+                    <p>Günlük <strong class="text-primary" >{{randomCar.dailyPrice | currency:"":""}}₺</strong>
+                      den başlayan fiyatlarla</p>
+                  </div>
+                </div>
+                <!-- carousel-caption end -->
                 <img [src]="getImagePath(randomCar.carImages[0].imagePath)" alt="">
+                
               </div>
   
-              <div class="col-md-4 text-end" style="padding-top: 90px;">
-                <div class="d-flex justify-content-start row">
-                  <ul class="list-group text-light mt-5 align-items-start" style="width: 200px;">
+              <div class="col-md-4 d-flex justify-content-center" style="padding-top: 90px;">
+                <div class="row">
+                  <ul class="list-group text-light mt-5 ">
   
                     <li class="list-group mt-5">
                       <div class="d-flex align-items-center">
                         <div class="text-center">
                           <div class="text-center">
-                            <button class="btn btn-warning" >
+                            <button class="btn btn-primary" >
                               <i class="bi bi-calendar-date"></i>
                             </button>
                           </div>
@@ -93,7 +105,7 @@
                       <div class="d-flex align-items-center">
                         <div class="text-center">
                           <div class="text-center">
-                            <button class="btn btn-warning" >
+                            <button class="btn btn-primary" >
                               <i class="bi bi-currency-dollar"></i>
                             </button>
                           </div>
@@ -108,7 +120,7 @@
                       <div class="d-flex align-items-center">
                         <div class="text-center">
                           <div class="text-center">
-                            <button class="btn btn-warning" >
+                            <button class="btn btn-primary" >
                               <i class="bi bi-info-circle"></i>
                             </button>
                           </div>
@@ -125,14 +137,7 @@
               </div>
             </div>
           </div>
-          <div class="container">
-            <div class="carousel-caption" routerLink="/car-details/{{randomCar.id}}">
-              <h1 style="text-transform: uppercase; color: var(--firstThemeColor);">{{randomCar.brandName}}
-                {{randomCar.carName}}</h1>
-              <p>Günlük <strong style="color: var(--firstThemeColor);">{{randomCar.dailyPrice | currency:"":""}}₺</strong>
-                den başlayan fiyatlarla</p>
-            </div>
-          </div>
+          
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#homeSlide" data-bs-slide="prev">
@@ -153,7 +158,7 @@
             <div class="row">
               <div class="col-sm-12 col-md-12 col-lg-12">
                 <h2 style="font-size: 60px;line-height: 60px;margin-bottom: 20px;font-weight: 900;"><span
-                    class="highlight">GOLDEN</span> CAR</h2>
+                    class="text-primary">MUSTO</span> CAR</h2>
                 <p>Yolculuk konforunuz için elimizden gelenin en iyisini yapıyoruz.</p>
               </div>
             </div>
@@ -210,7 +215,7 @@
   
     <div class="container">
       <form *ngIf="carsDataLoaded == true" class="row filterArea">
-        <div class="filterHeadText mt-3" style="color: var(--firstThemeColor);">ARAÇ FİLTRELE</div>
+        <div class="filterHeadText mt-3 text-primary" >ARAÇ FİLTRELE</div>
         <div class="divider div-transparent div-arrow-down mb-4" style="--icon-color:white"></div>
         <div class="row mb-3">
           <div class="col-md-2">
@@ -280,7 +285,7 @@
             </div> -->
             <div class="row">
               <div class="col-6">
-                <button (click)="filterCars()" type="submit" class="btn btn-outline-warning " style=" width: 180px; height: 70px;">
+                <button (click)="filterCars()" type="submit" class="btn btn-outline-primary " style=" width: 180px; height: 70px;">
                   Filtrele
                 </button>
               </div>
@@ -307,14 +312,14 @@
   
               <div class="card-body" style="color: white">
   
-                <h5 class="card-title text-center" style="color: var(--firstThemeColor);"><strong>{{car.brandName}}
+                <h5 class="card-title text-center text-primary" ><strong>{{car.brandName}}
                     {{car.carName}}</strong></h5>
                 <div class="divider div-transparent div-arrow-down mb-4" style="--icon-color:white"></div>
-                <p class="text-center">Günlük <strong style="color: var(--firstThemeColor);">{{car.dailyPrice |
+                <p class="text-center">Günlük <strong class="text-primary">{{car.dailyPrice |
                     currency:"":""}}₺</strong> den başlayan fiyatlarla..</p>
   
                 <div class="text-center">
-                  <button type="button" routerLink="/cars/carDetail/{{car.id}}" class="btn btn-outline-primary"
+                  <button type="button" routerLink="/cars/carDetail/{{car.id}}" class="btn btn-primary"
                    >İNCELE</button>
                 </div>  
               </div>

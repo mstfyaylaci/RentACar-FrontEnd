@@ -1,9 +1,4 @@
-body {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    min-height: var(--pageHeight);
-    color: #5a5a5a;
-  }
+
   
   /* CAROUSEL */
   
@@ -34,6 +29,8 @@ body {
     object-fit: cover;
     width: 90%;
   }
+
+  
   
   /* RESPONSIVE CSS */
   
@@ -82,10 +79,10 @@ body {
     line-height: 100px;
     width: 100px;
     height: 100px;
-    background: var(--firstThemeColor);
+    background:#007bff;
     display: inline-block;
     border-radius: 50%;
-    color: var(--secondThemeColor);
+    color:white;
     margin-bottom: 10px;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   }
@@ -149,4 +146,7 @@ body {
     font-size: 40px;
     margin-bottom: 10px;
   }
+
+  
+  
   

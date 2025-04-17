@@ -134,50 +134,50 @@
         <div class="card-group text-center">
           <div class="card" style="background-color: var(--secondThemeColor); color: var(--firstThemeColor);">
             <div class="card-body">
-              <strong>MARKA</strong>
+              <strong class="text-primary">MARKA</strong>
               <div class="divider div-transparent div-arrow-down mb-2" style="--icon-color:white"></div>
               <div style="color: white;">{{currentCar.brandName}}</div>
             </div>
           </div>
           <div class="card" style="background-color: var(--secondThemeColor); color: var(--firstThemeColor);">
             <div class="card-body">
-              <strong>MODEL</strong>
+              <strong class="text-primary">MODEL</strong>
               <div class="divider div-transparent div-arrow-down mb-2" style="--icon-color:white"></div>
               <div style="color: white;">{{currentCar.carName}}</div>
             </div>
           </div>
           <div class="card" style="background-color: var(--secondThemeColor); color: var(--firstThemeColor);">
             <div class="card-body">
-              <strong>RENK</strong>
+              <strong class="text-primary">RENK</strong>
               <div class="divider div-transparent div-arrow-down mb-2" style="--icon-color:white"></div>
               <div style="color: white;">{{currentCar.colorName}}</div>
             </div>
           </div>
           <div class="card" style="background-color: var(--secondThemeColor); color: var(--firstThemeColor);">
             <div class="card-body">
-              <strong>MODEL YILI</strong>
+              <strong class="text-primary">MODEL YILI</strong>
               <div class="divider div-transparent div-arrow-down mb-2" style="--icon-color:white"></div>
               <div style="color: white;">{{currentCar.modelYear}}</div>
             </div>
           </div>
           <div class="card" style="background-color: var(--secondThemeColor); color: var(--firstThemeColor);">
             <div class="card-body">
-              <strong>AÇIKLAMA</strong>
+              <strong class="text-primary">AÇIKLAMA</strong>
               <div class="divider div-transparent div-arrow-down mb-2" style="--icon-color:white"></div>
               <div style="color: white;">{{currentCar.description}}</div>
             </div>
           </div>
           <div class="card" style="background-color: var(--secondThemeColor); color: var(--firstThemeColor);">
             <div class="card-body">
-              <strong>GÜNLÜK ÜCRET</strong>
+              <strong class="text-primary">GÜNLÜK ÜCRET</strong>
               <div class="divider div-transparent div-arrow-down mb-2" style="--icon-color:white"></div>
               <div style="color: white;">{{currentCar.dailyPrice | currency:"":""}}₺</div>
             </div>
           </div>
           <div class="card" style="background-color: var(--secondThemeColor); color: var(--firstThemeColor);">
             <div class="card-body">
-              <button class="btn"
-                style="background-color: var(--firstThemeColor); color: var(--secondThemeColor); font-weight: bold; height: 100%; width: 100%;"
+              <button class="btn btn-primary"
+                style=" font-weight: bold; height: 100%; width: 100%;"
                 role="button" data-bs-toggle="modal" data-bs-target="#araciSepeteEkle">Kirala<br>
                 ({{currentCar.dailyPrice | currency:"":""}}₺)</button>
             </div>
@@ -196,15 +196,15 @@
   
           <div class="card-body" style="color: white">
   
-            <h5 class="card-title text-center" style="color: var(--firstThemeColor);"><strong>{{subCar.brandName}}
+            <h5 class="card-title text-center text-primary" ><strong>{{subCar.brandName}}
                 {{subCar.carName}}</strong></h5>
             <div class="divider div-transparent div-arrow-down mb-4" style="--icon-color:white"></div>
-            <p class="text-center">Günlük <strong style="color: var(--firstThemeColor);">{{subCar.dailyPrice |
+            <p class="text-center">Günlük <strong class="text-primary">{{subCar.dailyPrice |
                 currency:"":""}}₺</strong> den başlayan fiyatlarla..</p>
   
             <div class="text-center">
-              <a routerLink="/cars/carDetail/{{subCar.id}}" class="btn"
-                style="background-color: var(--firstThemeColor); color: var(--secondThemeColor); font-weight: bold;">İNCELE</a>
+              <a routerLink="/cars/carDetail/{{subCar.id}}" class="btn btn-primary"
+                style=" font-weight: bold;">İNCELE</a>
             </div>
           </div>
   

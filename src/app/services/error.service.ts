@@ -10,13 +10,14 @@ export class ErrorService {
 
 
   backendError(responseError:any,errorMessage:string){
+    
     if (responseError.error.ValidationErrors.length>0) {
       for (let i = 0; i < responseError.error.ValidationErrors.length; i++) {
         this.toastrService.error(responseError.error.ValidationErrors[i].ErrorMessage,"Doğrulama Hatası")
       }
     }
     else{
-      this.toastrService.error(errorMessage)
+      this.toastrService.error(responseError.error, errorMessage)
     }
   }
  
