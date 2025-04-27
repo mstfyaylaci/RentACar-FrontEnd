@@ -41,6 +41,13 @@ import { RegisterComponent } from './components/account/register/register.compon
 import { AccountLayaoutComponent } from './components/account/account-layaout/account-layaout.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { PaymentSuccesfulComponent } from './components/payment-succesful/payment-succesful.component';
+
+import { ProfileComponent } from './components/profile/profile.component';
+
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
+import { ConfirmOrderComponent } from './components/confirm-order/confirm-order.component';
 
 
 @NgModule({
@@ -77,6 +84,10 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
     LoginComponent,
     RegisterComponent,
     AccountLayaoutComponent,
+    PaymentSuccesfulComponent,
+    
+    ProfileComponent,
+    ConfirmOrderComponent,
     
   ],
   imports: [
@@ -87,6 +98,9 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
     HttpClientModule ,
     FormsModule,
     ReactiveFormsModule,
+    NgxMaskPipe,
+    NgxMaskDirective,
+    NgxSpinnerModule,
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     })
@@ -96,7 +110,8 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
       provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor,multi:true
     },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService
+    JwtHelperService,
+    provideNgxMask()
   ],
   bootstrap: [AppComponent]
 })

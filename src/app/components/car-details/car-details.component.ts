@@ -197,7 +197,7 @@ export class CarDetailsComponent implements OnInit {
   getCarsOfCurrentBrand() {
     this.carService.getCarsByBrandId(this.currentCar.brandId).subscribe((response) => {
       this.carsOfCurrentBrand = response.data;
-      console.log(this.carsOfCurrentBrand);
+     
       //Markaya ait diğer araçlar listesinden, mevcut arabayı çıkartıyorum. Mevcut arabayı zaten görüntülüyor.
       let index: number = -1;
       for (let i = 0; i < this.carsOfCurrentBrand.length; i++) {

@@ -12,6 +12,7 @@ import { AccountLayaoutComponent } from './components/account/account-layaout/ac
 import { RegisterComponent } from './components/account/register/register.component';
 import { LoginGuard } from './guards/login.guard';
 import { RoleGuard } from './guards/role.guard';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
  
@@ -25,6 +26,7 @@ const routes: Routes = [
     path: '', component: HomeLayaoutComponent, children: [
       { path: 'cars/carDetail/:carId', component: CarDetailsComponent },
       { path: "cart", component: CartComponent,canActivate: [LoginGuard] },
+      { path: 'profile', component: ProfileComponent, canActivate: [LoginGuard] },
       {
         path: 'admin', component: HomeLayaoutComponent, children: [
           { path: 'brand/manager', component: BrandManagerComponent ,canActivate: [LoginGuard,RoleGuard] ,data:{expectedRole:"admin"}},
@@ -38,12 +40,11 @@ const routes: Routes = [
   {
     path: 'account', component: AccountLayaoutComponent, children: [
       { path: 'login', component: LoginComponent ,canActivate: [LoginGuard]},
-      { path: 'register', component: RegisterComponent}
+      { path: 'register', component: RegisterComponent,canActivate: [LoginGuard]}
     ]
   }
   
-  
-  //{path:"cars/add", component:CarAddComponent},
+ 
   
   
 ];

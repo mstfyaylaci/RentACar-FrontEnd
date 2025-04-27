@@ -8,6 +8,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorageService } from './local-storage.service';
 import { UserForLogin } from '../models/auth/userForLogin';
 import { RegisterModel } from '../models/auth/registerModel';
+import { ResponseModel } from '../models/responseModel/responseModel';
+import { ChangePasswordModel } from '../models/auth/changePasswordModel';
 
 @Injectable({
   providedIn: 'root'
@@ -121,10 +123,10 @@ export class AuthService {
   }
 
   // Şifre değiştirme isteği atar
-  // changePassword(updatedUser: ChangePasswordModel): Observable<ResponseModel> {
-  //   let newPath = this.apiURL + 'auth/changepassword';
-  //   return this.httpClient.post<ResponseModel>(newPath, updatedUser);
-  // }
+  changePassword(updatedUser: ChangePasswordModel): Observable<ResponseModel> {
+    let newPath = this.apiUrl + 'auth/changepassword';
+    return this.httpClient.post<ResponseModel>(newPath, updatedUser);
+  }
 
   
 }

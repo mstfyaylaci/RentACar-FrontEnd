@@ -1,4 +1,4 @@
-<div >
+<div *ngIf="!confirmOrderOutputModel" >
 
     <!--Empty Cart Div-->
     <div *ngIf="cartItems.length === 0" class="text-center mt-5 mb-5">
@@ -33,7 +33,7 @@
         <!--Checkout ProgressBar End-->
 
         <!--If Payment is Not Completed-->
-        <div  class="row container">
+        <div *ngIf="!paymentOutputModel" class="row container">
 
             <!--Payment-->
             <div *ngIf="checkOutStep===1" class="card p-4" style="background-color: rgb(253, 253, 253);">
@@ -43,7 +43,8 @@
                     </button>
                 </div>
                 <div class="row mb-4">
-                    <app-payment></app-payment>
+                    <app-payment [cartItems]="cartItems" (paymentOutputModel)="setPaymentOutputModel($event)">
+                    </app-payment>
                 </div>
             </div>
             <!--Payment End-->
@@ -67,9 +68,9 @@
                                         <div class="row">
                                             <p class="card-text">
                                                 <small class="text-muted fw-bold ">Kiralama Süresi:
-                                                    {{formatDate(cartItem.rentDate)}} -
-                                                    {{formatDate(cartItem.returnDate)}}
-                                                    ({{calculateRentalPeriod(cartItem.rentDate,cartItem.returnDate)}}
+                                                    {{showDate(cartItem.rentDate)}} -
+                                                    {{showDate(cartItem.returnDate)}}
+                                                    ({{getRentalPeriod(cartItem.rentDate,cartItem.returnDate)}}
                                                     gün)<br></small>
                                             </p>
                                         </div>
@@ -81,7 +82,7 @@
                                                 <p class="card-text text-danger text-nowrap">
                                                     <strong>
                                                         {{
-                                                        cartItem.car.dailyPrice*calculateRentalPeriod(cartItem.rentDate,cartItem.returnDate)|currency:"":""
+                                                        cartItem.car.dailyPrice*getRentalPeriod(cartItem.rentDate,cartItem.returnDate)|currency:"":""
                                                         }}₺
                                                     </strong>
                                                 </p>
@@ -133,7 +134,7 @@
                                     <span class="float-start">Ödenecek tutar: </span>
                                 </small>
                                 <span class="float-end text-danger">
-                                    <strong>{{calculateTotalPrice() | currency:"":""}}₺</strong>
+                                    <strong>{{calculateTotalAmount() | currency:"":""}}₺</strong>
                                 </span>
                             </li>
                             <li  class="list-group border border-light"><br>
@@ -149,10 +150,10 @@
         </div>
         <!--If Payment is Not Completed End-->
 
-        <!--If Payment is Completed-->
-        <!-- <div *ngIf="paymentOutputModel" class="container">
+         <!--If Payment is Completed-->
+         <div *ngIf="paymentOutputModel" class="container">
             <div class="card p-4" style="background-color: rgb(253, 253, 253);">
-                
+                <!--Back Button-->
                 <div>
                     <button (click)="goCheckOutStep(1)" class="btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black"
@@ -162,19 +163,20 @@
                         </svg>
                     </button>
                 </div>
-                
+                <!--Back Button End-->
 
                 <app-confirm-order [confirmOrderInputModel]="createConfirmOrderInputModel()"
                     (confirmOrderOutputModel)="setConfirmOrderOutputModel($event)"></app-confirm-order>
             </div>
-        </div> -->
+        </div>
         <!--If Payment is Completed End-->
     </div>
     <!--Non Empty Cart Div End-->
 </div>
 
 <!--Payment Successful Div-->
-<!-- <div *ngIf="confirmOrderOutputModel" class="container">
-    <app-payment-successful [confirmOrderOutputModel]="confirmOrderOutputModel"></app-payment-successful>
-</div> -->
+<div *ngIf="confirmOrderOutputModel" class="container">
+    <app-payment-succesful [confirmOrderOutputModel]="confirmOrderOutputModel"></app-payment-succesful>
+    
+</div>
 <!--Payment Successful Div End-->

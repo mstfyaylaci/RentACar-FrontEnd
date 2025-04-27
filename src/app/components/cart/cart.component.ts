@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { UserForLogin } from 'src/app/models/auth/userForLogin';
 import { Car } from 'src/app/models/entites/car';
 import { CartItem } from 'src/app/models/entites/cartItem';
+import { ConfirmOrderOutputModel } from 'src/app/models/paymentModels/confirmOrderOutputModel';
+import { PaymentOutputModel } from 'src/app/models/paymentModels/paymentOutputModel';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CartService } from 'src/app/services/cart.service';
+import { DateTimeService } from 'src/app/services/date-time.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,18 +18,77 @@ import { CartService } from 'src/app/services/cart.service';
 export class CartComponent implements OnInit {
 
   checkOutStep: number = 0;
+  cartItems: CartItem[] ;
+  currentUser:UserForLogin
 
-  cartItems: CartItem[] 
+  paymentOutputModel: PaymentOutputModel;
+  confirmOrderOutputModel: ConfirmOrderOutputModel;
+
   rentalPeriod: number
   rentalStartDate: string
   rentalEndDate: string
 
-  constructor(private cartService:CartService,
-    private carImageService: CarImageService
+  constructor(
+    private cartService:CartService,
+    private carImageService: CarImageService,
+    private toastrService: ToastrService,
+    private dateTimeService: DateTimeService,
   ) { }
 
+
+  
   ngOnInit(): void {
+    this.resetCart()
     this.getCartItems()
+    
+  }
+
+  goCheckOutStep(step: Number) {
+    switch (step) {
+      case 0: {
+        this.paymentOutputModel = undefined!
+        this.checkOutStep = 0;
+        break;
+      }
+      case 1: {
+        this.paymentOutputModel = undefined!
+        this.checkOutStep = 1;
+        break;
+      }
+      case 2: {
+        this.checkOutStep = 2;
+        break;
+      }
+    }
+  }
+
+  setPaymentOutputModel(paymentOutputModel: PaymentOutputModel) {
+    console.log("setpaymentOutputModel", paymentOutputModel);
+    this.paymentOutputModel = paymentOutputModel;
+    this.checkOutStep = 2;
+  }
+
+  createConfirmOrderInputModel() {
+    let confirmOrderInputModel = {
+      cartItems: this.cartItems,
+      isCreditCardSaving: this.paymentOutputModel.isCreditCardSaving,
+      rentPaymentRequest: this.paymentOutputModel.rentPaymentRequest
+    };
+
+    return confirmOrderInputModel;
+  }
+
+  setConfirmOrderOutputModel(confirmOrderOutputModel: ConfirmOrderOutputModel) {
+    this.confirmOrderOutputModel = confirmOrderOutputModel;
+    console.log(confirmOrderOutputModel);
+    this.finishPayment();
+  }
+
+  finishPayment() {
+    this.cartService.clearCart();
+    this.checkOutStep = 0;
+    this.cartItems = [];
+    this.paymentOutputModel = undefined!
   }
 
   getCartItems(){
@@ -36,58 +100,34 @@ export class CartComponent implements OnInit {
     this.cartService.removeCartItem(car);
   }
 
-  calculateRentalPeriod(rentDate: Date, returnDate: Date): number {
-    const startDate = new Date(rentDate);
-    const endDate = new Date(returnDate);
-    const timeDifference = endDate.getTime() - startDate.getTime();
-    const dayDifference = timeDifference / (1000 * 3600 * 24);
-    return Math.ceil(dayDifference);
-  }
 
-  formatDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2); // Ayı 2 haneli yapmak için
-    const day = ('0' + date.getDate()).slice(-2); // Günü 2 haneli yapmak için
-    return `${day}.${month}.${year}`;
-  } 
-
-  goCheckOutStep(step: Number) {
-    switch (step) {
-      case 0: {
-        //this.paymentOutputModel = undefined!
-        this.checkOutStep = 0;
-        break;
-      }
-      case 1: {
-        //this.paymentOutputModel = undefined!
-        this.checkOutStep = 1;
-        break;
-      }
-      case 2: {
-        this.checkOutStep = 2;
-        break;
-      }
-    }
+  resetCart() {
+    this.checkOutStep = 0;
+    this.cartItems = [];
+    this.paymentOutputModel = undefined!
+    this.confirmOrderOutputModel = undefined!
   }
   
   confirmCart() {
     this.checkOutStep = 1;
   }
 
-  calculateTotalRentalPeriod(): number {
-    let totalDays = 0;
-    this.cartItems.forEach(item => {
-      totalDays += this.calculateRentalPeriod(item.rentDate, item.returnDate);
-    });
-    return totalDays;
+  getRentalPeriod(rentDate: Date, returnDate: Date): number {
+    return this.dateTimeService.getRentalPeriod(rentDate, returnDate);
   }
 
-  calculateTotalPrice(): number {
-    let totalPrice = 0;
-    this.cartItems.forEach(item => {
-      totalPrice += item.car.dailyPrice * this.calculateRentalPeriod(item.rentDate, item.returnDate);
-    });
-    return totalPrice;
+  
+
+  showDate(date: Date) {
+    return this.dateTimeService.showDate(date);
+  }
+  
+  calculateTotalRentalPeriod(): number {
+    return this.cartService.calculateTotalRentalPeriod(this.cartItems);
+  }
+
+  calculateTotalAmount(): number {
+    return this.cartService.calculateTotalAmount();
   }
  
 

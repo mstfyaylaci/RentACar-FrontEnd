@@ -4,6 +4,7 @@ import { ListResponseModel } from '../models/responseModel/listResponseModel';
 import { Rental } from '../models/entites/rental';
 import { Observable } from 'rxjs';
 import { SingleResponseModel } from '../models/responseModel/singleResponseModel';
+import { RentPaymentRequest } from '../models/paymentModels/rentPaymentRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,13 @@ export class RentalService {
 
     return this.httpClient
     .get<SingleResponseModel<boolean>>(newPath)
+
+  }
+
+  rent(rentPaymentRequest:RentPaymentRequest):Observable<SingleResponseModel<number>>{
+    console.log(rentPaymentRequest);
+    let newPath=this.apiUrl+"rent"
+    return this.httpClient.post<SingleResponseModel<number>>(newPath,rentPaymentRequest)
 
   }
 }
