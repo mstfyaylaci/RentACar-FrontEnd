@@ -1,9 +1,7 @@
-*.ts linguist-detectable=true
-*.html linguist-detectable=false
-node_modules/* linguist-vendored
-dist/* linguist-vendored
 *.ts linguist-language=TypeScript
-*.html linguist-language=Ignore
+*.ts linguist-detectable=true
+
 *.html linguist-detectable=false
 
-
+node_modules/** linguist-vendored
+dist/** linguist-vendored
