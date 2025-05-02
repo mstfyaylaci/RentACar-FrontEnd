@@ -4,4 +4,6 @@ node_modules/* linguist-vendored
 dist/* linguist-vendored
 *.ts linguist-language=TypeScript
 *.html linguist-language=Ignore
+*.html linguist-detectable=false
+
 
